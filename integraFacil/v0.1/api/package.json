@@ -1,0 +1,18 @@
+{
+  "name": "integrafacil",
+  "version": "0.0.1",
+  "description": "Integrador automático",
+  "main": "index.js",
+  "scripts": {
+    "start": "node carregar.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Rodrigo de Matos Alves",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.6.11",
+    "node-restful": "^0.2.6"
+  }
+}

@@ -9,12 +9,12 @@ horario = new Date;
 
 var options = {
     url: "https://hookb.in/BYrOLx6J72i202xdVBn9" ,
-    method: 'POST',
+    method: 'PUT',
     headers: headers,
     json: true,
     body: {user:"demo", last_name:"test",contact:"989898989",horario_envio:dateFormat(horario, "dddd, mmmm dS, yyyy, h:MM:ss TT")}
 }
-axios.post(options.url, options.body)
+axios.put(options.url, options.body)
     .then(
         console.log("Enviado com sucesso")
     ).catch(function(e) {

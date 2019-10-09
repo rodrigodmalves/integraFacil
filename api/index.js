@@ -1,14 +1,18 @@
 const axios = require('axios');
+const dateFormat = require('dateformat');
 
 var headers = {
     'Content-Type': 'application/json'
 }
+
+horario = new Date;
+
 var options = {
     url: "https://hookb.in/BYrOLx6J72i202xdVBn9" ,
     method: 'POST',
     headers: headers,
     json: true,
-    body: {user:"demo", last_name:"test",contact:"989898989"}
+    body: {user:"demo", last_name:"test",contact:"989898989",horario_envio:dateFormat(horario, "dddd, mmmm dS, yyyy, h:MM:ss TT")}
 }
 axios.post(options.url, options.body)
     .then(

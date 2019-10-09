@@ -1,1 +1,0 @@
-Sundvall, Erik & Nyström, Mikael & Karlsson, Daniel & Eneling, Martin & Chen, Rong & Orman, Håkan. (2013). Applying representational state transfer (REST) architecture to archetype-based electronic health record systems. BMC medical informatics and decision making. 13. 57. 10.1186/1472-6947-13-57. 

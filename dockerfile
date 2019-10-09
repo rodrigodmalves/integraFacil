@@ -10,7 +10,7 @@ RUN chown -R integraFacil:integraFacil $HOME/*
 
 USER root
 WORKDIR $HOME
-RUN npm cache clean --force && npm install
+RUN npm cache clean --force && npm install && npm config set strict-ssl false
 COPY . $HOME
 RUN chown -R integraFacil:integraFacil $HOME/*
 USER integraFacil

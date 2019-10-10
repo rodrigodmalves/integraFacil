@@ -21,6 +21,38 @@
 //      GRAVAR_LOG - 
 
 //webServer de configuração
+//  CONECTOR
+//      Cadastrar
+//          Descritor,
+//          URI,
+//          Tem segurança?
+//              Sim
+//                  Usuário
+//                  Senha
+//              Não
+//          Fazer TRACE pra URI informada antes de salvar
+//      Editar
+//          Fazer TRACE pra URI informada antes de salvar
+//      Excluir
 
-// 
+//  INTEGRAÇÕES
+//      Cadastrar
+//          Descritor
+//          nomeEndpoint
+//          tipoIntegração
+//              GET
+//              POST
+//              PUT
+//              DELETE
+//          ARQUIVO MAPEAMENTO
+//              Inicio 
+//      Editar
+//      Excluir
+
+
+//  LOGS
+//      Verificar tempo de monitoramento
+//      Separar Lista Integrações
+//      Agrupar por Em andamento sucesso e erros
+//      Listar instâncias, de 20 em 20
 

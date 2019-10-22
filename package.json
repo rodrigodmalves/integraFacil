@@ -1,20 +1,33 @@
 {
   "name": "integrafacil",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Integrador automatico",
   "main": "index.js",
-  "scripts": {
-    "start": "node api/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.17.1",
+    "mongoose": "^5.0.16",
+    "redis": "^2.8.0"
   },
+  "devDependencies": {
+    "nodemon": "^1.17.3"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon ./bin/server.js"
+  },
+  "keywords": [],
   "author": "Rodrigo de Matos Alves",
   "license": "ISC",
-  "dependencies": {
-    "dateformat": "^3.0.3",
-    "axios": "^0.19.0",
-    "mongoose": "^5.6.11",
-    "body-parser": "^1.19.0",
-    "express": "^4.17.1",
-    "node-restful": "^0.2.6"
-  }
+  "bin": {
+    "integrafacil": "server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rodrigodmalves/integraFacil.git"
+  },
+  "bugs": {
+    "url": "https://github.com/rodrigodmalves/integraFacil/issues"
+  },
+  "homepage": "https://github.com/rodrigodmalves/integraFacil#readme"
 }

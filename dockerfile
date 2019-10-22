@@ -1,7 +1,7 @@
 FROM node:10.16.3
 
 RUN useradd --user-group --create-home integraFacil &&\
-  npm install --global npm@6.9.0
+  npm install --global npm 
 
 ENV HOME=/home/integraFacil
 

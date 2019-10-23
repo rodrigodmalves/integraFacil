@@ -3,25 +3,12 @@
   "version": "1.0.0",
   "description": "Integrador automatico",
   "main": "index.js",
-  "dependencies": {
-    "body-parser": "^1.18.3",
-    "express": "^4.17.1",
-    "mongoose": "^5.0.16",
-    "redis": "^2.8.0"
-  },
-  "devDependencies": {
-    "nodemon": "^1.17.3"
-  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon ./bin/server.js"
+    "start": "nodemon index.js"
   },
-  "keywords": [],
   "author": "Rodrigo de Matos Alves",
   "license": "ISC",
-  "bin": {
-    "integrafacil": "server.js"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/rodrigodmalves/integraFacil.git"
@@ -29,5 +16,19 @@
   "bugs": {
     "url": "https://github.com/rodrigodmalves/integraFacil/issues"
   },
-  "homepage": "https://github.com/rodrigodmalves/integraFacil#readme"
+  "homepage": "https://github.com/rodrigodmalves/integraFacil#readme",
+  "dependencies": {
+    "body-parser": "1.7.0",
+    "express": "^4.8.7",
+    "jsonwebtoken": "^7.3.0",
+    "moment": "^2.17.1",
+    "moment-timezone": "^0.5.13",
+    "mongoose": "^5.1.1",
+    "node-uuid": "^1.4.8",
+    "swagger-ui-express": "^2.0.13",
+    "sync-request": "^4.0.2"
+  },
+  "devDependencies": {
+    "nodemon": "^1.17.3"
+  }
 }

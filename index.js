@@ -1,58 +1,30 @@
-//API
+const config = require('./common/config/env.config.js');
 
-//Scheulder
-//  verificando quais integrações devem estar de pé
-//      GRAVAR_LOG - Listar Integrações ativas
-//  iniciar as rotas 
-//  parar as rotas desativadas
+const express = require('express');
+const app = express();
+const bodyParser = require('body-parser');
 
-//rota acionada
-//  GRAVAR_LOG - acionamento da integração
-//  receber payload
-//  GRAVAR_LOG - registrar payload recebido
-//  pegar informações da rota
-//  carregar mapeamento da rota
-//  processar ETL do payload
-//      GRAVAR_LOG - Registrar payload processado    
-//  carregar informações para onde enviar
-//  realizar envio
-//      GRAVAR_LOG - 
-//  retornar sucesso/erro
-//      GRAVAR_LOG - 
+const AuthorizationRouter = require('./authorization/routes.config');
+const UsersRouter = require('./users/routes.config');
 
-//webServer de configuração
-//  CONECTOR
-//      Cadastrar
-//          Descritor,
-//          URI,
-//          Tem segurança?
-//              Sim
-//                  Usuário
-//                  Senha
-//              Não
-//          Fazer TRACE pra URI informada antes de salvar
-//      Editar
-//          Fazer TRACE pra URI informada antes de salvar
-//      Excluir
+app.use(function (req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Credentials', 'true');
+    res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE');
+    res.header('Access-Control-Expose-Headers', 'Content-Length');
+    res.header('Access-Control-Allow-Headers', 'Accept, Authorization, Content-Type, X-Requested-With, Range');
+    if (req.method === 'OPTIONS') {
+        return res.send(200);
+    } else {
+        return next();
+    }
+});
 
-//  INTEGRAÇÕES
-//      Cadastrar
-//          Descritor
-//          nomeEndpoint
-//          tipoIntegração
-//              GET
-//              POST
-//              PUT
-//              DELETE
-//          ARQUIVO MAPEAMENTO
-//              Inicio 
-//      Editar
-//      Excluir
+app.use(bodyParser.json());
+AuthorizationRouter.routesConfig(app);
+UsersRouter.routesConfig(app);
 
 
-//  LOGS
-//      Verificar tempo de monitoramento
-//      Separar Lista Integrações
-//      Agrupar por Em andamento sucesso e erros
-//      Listar instâncias, de 20 em 20
-
+app.listen(config.port, function () {
+    console.log('app listening at port %s', config.port);
+});

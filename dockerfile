@@ -1,4 +1,4 @@
-FROM node:10.16.3
+FROM node:10-alpine
 
 RUN useradd --user-group --create-home integraFacil &&\
   npm install --global npm 
@@ -14,4 +14,5 @@ RUN npm cache clean --force && npm install && npm config set strict-ssl false
 COPY . $HOME
 RUN chown -R integraFacil:integraFacil $HOME/*
 USER integraFacil
+EXPOSE 3000
 CMD ["npm", "start"]

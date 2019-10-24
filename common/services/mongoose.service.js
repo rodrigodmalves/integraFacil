@@ -1,4 +1,18 @@
 const mongoose = require('mongoose');
+
+const userSchema = new mongoose.Schema({
+    username: {
+      type: String,
+      required: [true, 'Username is required']
+    },
+    created: {
+      type: Date,
+      required: [true, 'Created date is required']
+    }
+  })
+
+constUser = mongoose.model('user', userSchema, 'user');
+const connectionString ='mongodb+srv://integrafacil:flgb8409@cluster0-b9ios.gcp.mongodb.net/test?retryWrites=true&w=majority';
 let count = 0;
 
 const options = {
@@ -13,11 +27,11 @@ const options = {
 };
 
 const connectWithRetry = () => {
-    console.log('MongoDB connection with retry')
-    mongoose.connect("mongodb://localhost:27017/integraFacil", options).then(()=>{
-        console.log('MongoDB is connected')
+    console.log('MongoDB - conectando...');
+    mongoose.connect(connectionString, options).then(()=>{
+        console.log('MongoDB - conectado.')
     }).catch(err=>{
-        console.log('MongoDB connection unsuccessful, retry after 5 seconds. ', ++count);
+        console.log('MongoDB - Falha de conexao ('+err+') ... tentando novamente em 5 segundos. Tentativa ', ++count);
         setTimeout(connectWithRetry, 5000)
     })
 };

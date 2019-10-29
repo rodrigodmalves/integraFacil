@@ -1,3 +1,4 @@
+console.log('---- [/authorization/middlewares/verify.user.middleware.js] Importando verificacao de usuario');
 const UserModel = require('../../users/models/users.model');
 const crypto = require('crypto');
 
@@ -6,10 +7,10 @@ exports.hasAuthValidFields = (req, res, next) => {
 
     if (req.body) {
         if (!req.body.email) {
-            errors.push('ERRO - Campo email em branco');
+            errors.push('---- [/authorization/middlewares/verify.user.middleware.js] ERRO - Campo email em branco');
         }
         if (!req.body.password) {
-            errors.push('ERRO - Campo password em branco');
+            errors.push('---- [/authorization/middlewares/verify.user.middleware.js] ERRO - Campo password em branco');
         }
 
         if (errors.length) {
@@ -18,7 +19,7 @@ exports.hasAuthValidFields = (req, res, next) => {
             return next();
         }
     } else {
-        return res.status(400).send({errors: 'ERRO - Campos em branco'});
+        return res.status(400).send({errors: '---- [/authorization/middlewares/verify.user.middleware.js]ERRO - Campos em branco'});
     }
 };
 
@@ -41,8 +42,9 @@ exports.isPasswordAndUserMatch = (req, res, next) => {
                     };
                     return next();
                 } else {
-                    return res.status(400).send({errors: ['Email ou password inválido']});
+                    return res.status(400).send({errors: ['---- [/authorization/middlewares/verify.user.middleware.js] Email ou password inválido']});
                 }
             }
         });
 };
+console.log('---- [/authorization/middlewares/verify.user.middleware.js] Importando verificacao de usuario - OK');

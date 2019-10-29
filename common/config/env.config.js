@@ -1,3 +1,4 @@
+console.log('-- [/commom/config/env.config.js] Definindo configuracoes do servico');
 module.exports = {
     "port": 3000,
     "appEndpoint": "http://localhost:3000",
@@ -11,3 +12,4 @@ module.exports = {
         "ADMIN": 2048
     }
 };
+console.log('-- [/commom/config/env.config.js] Definindo configuracoes do servico - OK');

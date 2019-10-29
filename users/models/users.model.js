@@ -1,3 +1,4 @@
+console.log('----- [/users/models/user.model.js] Importando schema de usuario');
 const mongoose = require('../../common/services/mongoose.service').mongoose;
 const Schema = mongoose.Schema;
 
@@ -22,7 +23,10 @@ userSchema.findById = function (cb) {
     return this.model('Users').find({id: this.id}, cb);
 };
 
+console.log('------ [/users/models/user.model.js] Definindo Schema');
 const User = mongoose.model('Users', userSchema);
+console.log('------ [/users/models/user.model.js] Definindo Schema - OK');
+
 
 
 exports.findByEmail = (email) => {
@@ -86,3 +90,4 @@ exports.removeById = (userId) => {
     });
 };
 
+console.log('----- [/users/models/user.model.js] Importando schema de usuario - OK');

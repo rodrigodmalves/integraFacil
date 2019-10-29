@@ -1,7 +1,9 @@
+console.log('--- [/users/controlles/users.controller.js] Importando modulo de controle de usuario');
 const UserModel = require('../models/users.model');
 const crypto = require('crypto');
 
 exports.insert = (req, res) => {
+    console.log('Feito post, realizando insert.');
     let salt = crypto.randomBytes(16).toString('base64');
     let hash = crypto.createHmac('sha512', salt).update(req.body.password).digest("base64");
     req.body.password = salt + "$" + hash;
@@ -13,6 +15,7 @@ exports.insert = (req, res) => {
 };
 
 exports.list = (req, res) => {
+    console.log('Feito get, realizando list.');
     let limit = req.query.limit && req.query.limit <= 100 ? parseInt(req.query.limit) : 10;
     let page = 0;
     if (req.query) {
@@ -28,12 +31,14 @@ exports.list = (req, res) => {
 };
 
 exports.getById = (req, res) => {
+    console.log('Feito get, realizando busca.');
     UserModel.findById(req.params.userId)
         .then((result) => {
             res.status(200).send(result);
         });
 };
 exports.patchById = (req, res) => {
+    console.log('Feito patch, realizando update.');
     if (req.body.password) {
         let salt = crypto.randomBytes(16).toString('base64');
         let hash = crypto.createHmac('sha512', salt).update(req.body.password).digest("base64");
@@ -48,8 +53,10 @@ exports.patchById = (req, res) => {
 };
 
 exports.removeById = (req, res) => {
+    console.log('Feito delete, realizando remoção.');
     UserModel.removeById(req.params.userId)
         .then((result)=>{
             res.status(204).send({});
         });
 };
+console.log('--- [/users/controlles/users.controller.js] Importando modulo de controle de usuario - OK');

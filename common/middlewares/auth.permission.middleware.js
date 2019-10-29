@@ -1,3 +1,5 @@
+console.log('---- [/common/middlewares/auth.permission.middleware.js] Importando modulo controle permissoes');
+
 const jwt = require('jsonwebtoken'),
     secret = require('../config/env.config')['jwt_secret'];
 
@@ -41,3 +43,4 @@ exports.sameUserCantDoThisAction = (req, res, next) => {
     }
 
 };
+console.log('---- [/common/middlewares/auth.permission.middleware.js] Importando modulo controle permissoes');

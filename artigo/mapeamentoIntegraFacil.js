@@ -1,27 +1,52 @@
- void cadastrarConector(Endpoint, usuario, senha, formaAutenticacao, testado=false){
+void salvaConector(Endpoint, usuario, senha, formaAutenticacao,testado, estaAtivo){
 	
-	conector = adicionarBanco(Endpoint, usuario, senha, formaAutenticacao,testado);
+	addConectorBanco(Endpoint, usuario, senha, formaAutenticacao,testado, estaAtivo);
+	return true;
+};
+ void cadastrarConector(endpoint, usuario, senha, formaAutenticacao, testado=false, estaAtivo=false){
+	
+	conector = salvaConector(endpoint, usuario, senha, formaAutenticacao,testado, estaAtivo);
 	if(conector.sucesso = true)
 		return true;
 	else
-		return conector.msg_falha;
+		return conector.msgFalha;
 
  };
- 
+ void conecta(conector.endpoint,conector.usuario,conector.senha,conector.formaAuth){
+	 return true;
+ };
+ void ativaConector(conector){
+	return true;
+ };
  void testaConector(conector){
 	resultado = conecta(conector.endpoint,conector.usuario,conector.senha,conector.formaAuth);
 	if(resultado ='200')
 		return ativaConector(conector);
 	else
-		return resultado.error;
- }
- void ativaConector(conector){
-
+		return resultado.msgFalha;
+ };
+ void ativarConector(conector){
+	
+	if(conector.testado)
+		if(!conector.estaAtivo)
+			return ativaConector(conector);
+		else
+			return "O conector j· est· ativo.";
+	else
+		return "O conector n„o foi testado.";
  };
 
-void cadastrarIntegracao(descricao){
+ void salvaIntegracao(){
+	addIntegracaoBanco();
+	return true;
+};
 
-	
+void cadastrarIntegracao(descricao,nomeUnico, exemploEntrada, exemploSaida){
+	if(!buscaIntgracao(nomeUnico)){
+		return"
+	}
+	salvaIntegracao(descricao,nomeUnico, exemploEntrada, exemploSaida)
+
 }
 Cadastrar integra√ß√£o
 	Definir descri√ß√£o

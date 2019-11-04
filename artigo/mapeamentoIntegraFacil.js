@@ -1,17 +1,28 @@
-Front end
-Cadastrar "conector"
-	Endpoint
-	usuário
-	senha
-	forma de autenticação
-	definir flag para nao_testado
-Teste de conector
-	retornou 200
-		altera flag para testado
-		libera ativação
-	retornou qrqr outra coisa, dá erro.
-		altera flag para nao_testado
-		bloqueia ativação
+ void cadastrarConector(Endpoint, usuario, senha, formaAutenticacao, testado=false){
+	
+	conector = adicionarBanco(Endpoint, usuario, senha, formaAutenticacao,testado);
+	if(conector.sucesso = true)
+		return true;
+	else
+		return conector.msg_falha;
+
+ };
+ 
+ void testaConector(conector){
+	resultado = conecta(conector.endpoint,conector.usuario,conector.senha,conector.formaAuth);
+	if(resultado ='200')
+		return ativaConector(conector);
+	else
+		return resultado.error;
+ }
+ void ativaConector(conector){
+
+ };
+
+void cadastrarIntegracao(descricao){
+
+	
+}
 Cadastrar integração
 	Definir descrição
 	definir nomeUnico

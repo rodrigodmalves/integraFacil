@@ -1,11 +1,7 @@
 console.log('-- [/common/services/log.service.js] LOG - Importando modulo');
-const erro = false;
+var erro = false;
 
-exports.log = {
-    registrarLog(timestamp, integracao, mensagem,tipoRota,payload){
-        erro = '[data: '+timestamp+'] [integracao: '+integracao+'] - [mensagem: '+ mensagem + '][TipoRota:'+tipoRota +' - [payload: ' + payload +' ]';
-        console.log(erro);
-        return erro;
-    },
+exports.registrarLog = function(timestamp, integracao, mensagem,tipoRota,payload){
+    return '[data:'+timestamp+'][descIntegracao:'+integracao+'][msg:'+ mensagem +'][tipoRota:'+tipoRota +']-[payload:'+ payload +']';
 };
 console.log('-- [/common/services/log.service.js] LOG - Importando modulo - OK');

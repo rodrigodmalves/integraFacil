@@ -13,10 +13,11 @@ listaIntegracao = [
 ];
 
 app.listen(config.portaApp, function () {
-    console.log('- [/index.js] APP executando. Ouvindo na porta %s', config.portaApp);
+        console.log('- [/index.js] APP executando. Ouvindo na porta %s', config.portaApp);
+        listaIntegracao.forEach(element => { 
+            rotas.ativarRota(element);
+        });
 });
 
-listaIntegracao.forEach(element => { 
-    rotas.ativarRota(element);
-});
+
 console.log('- [/index.js] Iniciando aplicacao - OK');

@@ -1,28 +1,16 @@
-//pessoa cadastra as informa��es
-//clica em salvar
-cadastrarConector(endpoint, usuario, senha, formaAutenticacao, testado=false, estaAtivo=false){
-	conector = salvaConector(endpoint, usuario, senha, formaAutenticacao,testado, estaAtivo);
-	return (conector.sucesso = true ? conector.sucesso : conector.msgFalha);
- };
-
-salvaConector(Endpoint, usuario, senha, formaAutenticacao,testado, estaAtivo){
-	addConectorBanco(Endpoint, usuario, senha, formaAutenticacao,testado, estaAtivo);
+function conecta(endpoint,usuario,senha,formaAuth){
 	return true;
 };
-//para ativar o conector a pessoa tem que testar
-void testaConector(conector){
-	resultado = conecta(conector.endpoint,conector.usuario,conector.senha,conector.formaAuth);
-	if(resultado ='200')
-		return ativarConector(conector);
-	else
-		return resultado.msgFalha;
- };
-
- void conecta(conector.endpoint,conector.usuario,conector.senha,conector.formaAuth){
+function addConectorBanco(endpoint, usuario, senha, formaAutenticacao,testado, estaAtivo){
 	return true;
+}
+
+
+function salvaConector(endpoint, usuario, senha, formaAutenticacao,testado, estaAtivo){
+	addConectorBanco(endpoint, usuario, senha, formaAutenticacao,testado, estaAtivo);
 };
 
-void ativarConector(conector){	
+function ativarConector(conector){	
 	if(conector.testado)
 		if(!conector.estaAtivo){
 			ativarRota(conector);
@@ -34,73 +22,96 @@ void ativarConector(conector){
 		return "O conector n�o foi testado.";
  };
 
+function cadastrarConector(endpoint, usuario, senha, formaAutenticacao, testado=false, estaAtivo=false){
+	conector = salvaConector(endpoint, usuario, senha, formaAutenticacao,testado, estaAtivo);
+	return (conector.sucesso = true ? conector.sucesso : conector.msgFalha);
+ };
 
+function testaConector(conector){
+	resultado = conecta(conector.endpoint,conector.usuario,conector.senha,conector.formaAuth);
+	if(resultado ='200')
+		return ativarConector(conector);
+	else
+		return resultado.msgFalha;
+ };
 
- //	
-
- void salvaIntegracao(){
-	addIntegracaoBanco();
+function addIntegracaoBanco(descricao,nomeUnico, exemploEntrada, exemploSaida, mapeamento, conectorSaida){
 	return true;
+}
+function buscaIntgracao(nomeUnico){
+	return true;
+}
+ 
+function salvaIntegracao(descricao,nomeUnico, exemploEntrada, exemploSaida, mapeamento, conectorSaida){
+	addIntegracaoBanco(descricao,nomeUnico, exemploEntrada, exemploSaida, mapeamento, conectorSaida);
 };
 
-void cadastrarIntegracao(descricao,nomeUnico, exemploEntrada, exemploSaida){
-	if(!buscaIntgracao(nomeUnico)){
-		return "
-	}
-	salvaIntegracao(descricao,nomeUnico, exemploEntrada, exemploSaida)
-
-}
-Cadastrar integração
-	Definir descrição
-	definir nomeUnico
-	selecionar arquivo exemplo entrada
-	Selecionar arquivo exemplo saída
-		Definir mapeamento
-		salvar em banco
-			campo entrada = campo saida
-	selecionar conector
-	salvar em banco
-	disponibilizar "endpoint"
-Ao ativar integração, 
-	alterar flag para "ativo"
-	acionar rota do backend para subir o serviço
-Ao desativar integração
-	alterar flag para "inativo"
-	acionar rota do backend para parar o serviço
-Logs
-	Listar integrações que existem cadastros, diferenciar integrações ativas das inativas
-	Ao selecionar uma integração
-		listar dados das instâncias
-	permitir baixar o conteúdo
--------------------------------------------------------
-Backend
-Ao iniciar
-	subir o serviços
-	buscar a lista de endpoints testados e ativos
-	subir serviços
-	ficar aguardando conexões
-Ao acionar ativar integração.
-	Buscar integração.
-	subir o serviço
-Ao desativar integração
-	Verificar se está ativa
-	Se sim
-		desativar
+function cadastrarIntegracao(descricao,nomeUnico, exemploEntrada, exemploSaida, mapeamento, conectorSaida){
+	if(!buscaIntgracao(nomeUnico))
+		return "Defina um identificador unico";
 	else
-		retornar erro
-Ao ter endpoint acionado
-	guardar horário de acionamento
-	receber endpoint
-		guardar payload recebido
-	buscar lista de mapeamento
-	Explodir payload pelo nome
-		Bater lista campo entrada = campo saida com for
-	com os valores salvos, criar um novo payload no formato final
-		guardar payload final
-	conectar com o endpoint final
-	enviar payload 
-	salvar retorno do endpoint.
-	
-	Gravar histórico guardado da instância
+		return salvaIntegracao(descricao,nomeUnico, exemploEntrada, exemploSaida, mapeamento, conectorSaida);
+}	
+
+function ativarRota(){
+	return true
+ };
+ 
+ function desativarRota(){
+	return true
+ };
+
+function ativarIntegracao(integracao){	
+	if(integracao.estaAtivo)
+		if(integracao.conectorSaida.estaAtivo)
+			return ativarRota(conector);
+		else
+			return "O conector n�o foi testado."
+	else
+		return "o conector j� est� ativo";
+ };
+ function desativarIntegra��o(integracao){	
+	if(!integracao.estaAtivo)
+		return desativarRota(conector);
+	else
+		return "a integracao j� est� inativa";
+ };
+
+
+//backend 
+function subirServicos(integracaoAtiva){
+	return ativarIntegracao(integracaoAtiva);
+}
+
+function init(){
+	listaIntegracoesAtivas = buscaIntegracoesAtivos();
+	listaIntegracoesAtivas.foreach(subirServicos)	 
+	return true
+}
+function buscaMapeamento(integracao){
+	return true;
+}
+
+function mapear(mapeamento,payloadRecebido){
+	//Bater lista campo entrada = campo saida com for
+	return true
+}
+function enviaPayload(payloadMapeado){
+	//conectar com o endpoint final
+	//enviar payload 
+	//salvar retorno do endpoint.
+	return true;
+}
+function acionarRota(integracao,payloadRecebido){
+	registrarLog(date.now(),integracao,"recebido Payload",payloadRecebido)
+	mapeamento = buscaMapeamento(integracao);
+	payloadMapeado = mapear(mapeamento,payloadRecebido)
+	registrarLog(date.now(),integracao,"Mapeado Payload",payloadMapeado)
+	resultadoEnvio=enviaPayload(payloadMapeado);
+	registrarLog(date.now(),integracao,"Mensagem Retorno")
 	FIM
+}
 	
+function registrarLog(timestamp, integracao, mensagem,payload){
+	return true;
+}

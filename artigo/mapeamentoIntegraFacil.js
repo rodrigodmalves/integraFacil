@@ -1,40 +1,42 @@
-void salvaConector(Endpoint, usuario, senha, formaAutenticacao,testado, estaAtivo){
-	
+//pessoa cadastra as informações
+//clica em salvar
+cadastrarConector(endpoint, usuario, senha, formaAutenticacao, testado=false, estaAtivo=false){
+	conector = salvaConector(endpoint, usuario, senha, formaAutenticacao,testado, estaAtivo);
+	return (conector.sucesso = true ? conector.sucesso : conector.msgFalha);
+ };
+
+salvaConector(Endpoint, usuario, senha, formaAutenticacao,testado, estaAtivo){
 	addConectorBanco(Endpoint, usuario, senha, formaAutenticacao,testado, estaAtivo);
 	return true;
 };
- void cadastrarConector(endpoint, usuario, senha, formaAutenticacao, testado=false, estaAtivo=false){
-	
-	conector = salvaConector(endpoint, usuario, senha, formaAutenticacao,testado, estaAtivo);
-	if(conector.sucesso = true)
-		return true;
-	else
-		return conector.msgFalha;
-
- };
- void conecta(conector.endpoint,conector.usuario,conector.senha,conector.formaAuth){
-	 return true;
- };
- void ativaConector(conector){
-	return true;
- };
- void testaConector(conector){
+//para ativar o conector a pessoa tem que testar
+void testaConector(conector){
 	resultado = conecta(conector.endpoint,conector.usuario,conector.senha,conector.formaAuth);
 	if(resultado ='200')
-		return ativaConector(conector);
+		return ativarConector(conector);
 	else
 		return resultado.msgFalha;
  };
- void ativarConector(conector){
-	
+
+ void conecta(conector.endpoint,conector.usuario,conector.senha,conector.formaAuth){
+	return true;
+};
+
+void ativarConector(conector){	
 	if(conector.testado)
-		if(!conector.estaAtivo)
-			return ativaConector(conector);
+		if(!conector.estaAtivo){
+			ativarRota(conector);
+			return "200";
+		}
 		else
 			return "O conector já está ativo.";
 	else
 		return "O conector não foi testado.";
  };
+
+
+
+ //	
 
  void salvaIntegracao(){
 	addIntegracaoBanco();
@@ -43,7 +45,7 @@ void salvaConector(Endpoint, usuario, senha, formaAutenticacao,testado, estaAtiv
 
 void cadastrarIntegracao(descricao,nomeUnico, exemploEntrada, exemploSaida){
 	if(!buscaIntgracao(nomeUnico)){
-		return"
+		return "
 	}
 	salvaIntegracao(descricao,nomeUnico, exemploEntrada, exemploSaida)
 

@@ -1,23 +1,17 @@
-console.log('-- [/common/services/log.service.js] LOG - Importando modulo');
+const chalk = require('chalk');
+
+console.log(chalk.blue('--- [/common/services/log.service.js] LOG - Importando modulo'));
 
 exports.registrarLog = function(tipo,exibePrompt,timestamp, integracao, mensagem,tipoRota,payload){
-    var log;
+    var exibePromptSucesso=true;
     switch(tipo){
-        case 'erro': 
-            log = '\n[LOG:'+tipo+'] => [data:'+(new Date(timestamp).toISOString())+'][descIntegracao:'+integracao+'][msg:'+ mensagem +'][tipoRota:'+tipoRota +']\n[payload:'+ payload +']\n';    
-            break;
         case 'sucesso': 
-            log = '[LOG:'+tipo+'] => [data:'+(new Date(timestamp).toISOString())+'][descIntegracao:'+integracao+'][msg:'+ mensagem +'][tipoRota:'+tipoRota +']';    
-            break;
+            return (exibePromptSucesso === true ? console.log(chalk.bgGreen('[LOG:'+tipo+'] => [data:'+(new Date(timestamp).toISOString())+'][descIntegracao:'+integracao+'][msg:'+ mensagem +'][tipoRota:'+tipoRota +']')): true);    
+        case 'erro': 
+            return console.log(chalk.red('[LOG:'+tipo+'] => [data:'+(new Date(timestamp).toISOString())+'][descIntegracao:'+integracao+'][msg:'+ mensagem +'][tipoRota:'+tipoRota +']\n[payload:'+ payload +']'));    
         default:
-            log = "ERRO - Verifique o tipo de log definido e tente novamente.";
-            break;
+            return console.log(chalk.red('ERRO - Verifique o tipo de log definido e tente novamente.'));
     }
-    //salvar em banco
-    if(exibePrompt === true)
-        return console.log(log);
-    else
-        return true;
 };
 
-console.log('-- [/common/services/log.service.js] LOG - Importando modulo - OK'); 
+console.log(chalk.blue('--- [/common/services/log.service.js] LOG - Importando modulo - OK')); 

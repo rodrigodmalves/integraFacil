@@ -5,7 +5,6 @@ function addConectorBanco(endpoint, usuario, senha, formaAutenticacao,testado, e
 	return true;
 }
 
-
 function salvaConector(endpoint, usuario, senha, formaAutenticacao,testado, estaAtivo){
 	addConectorBanco(endpoint, usuario, senha, formaAutenticacao,testado, estaAtivo);
 };
@@ -112,6 +111,3 @@ function acionarRota(integracao,payloadRecebido){
 	FIM
 }
 	
-function registrarLog(timestamp, integracao, mensagem,payload){
-	return true;
-}

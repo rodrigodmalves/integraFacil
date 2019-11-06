@@ -1,31 +1,26 @@
-console.log('-- [/common/services/rotas.service.js] Rotas - Importando modulo');
-
+const chalk = require('chalk');
+console.log(chalk.blue('--- [/common/services/rotas.service.js] Rotas - Importando modulo'));
 const log = require('../../common/services/log.service.js');
-const express = require('express');
-const expressInstancia = express();
 
-expressInstancia.use(function (req, res, next) {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Credentials', 'false');
-    res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE');
-    res.header('Access-Control-Expose-Headers', 'Content-Length');
-    res.header('Access-Control-Allow-Headers', 'Accept, Authorization, Content-Type, X-Requested-With, Range');
-    if (req.method === 'OPTIONS') {
-        return res.send(200);
-    } else {
-        return next();
-    }
-});
+module.conecta = function(endpoint,conteudo){
+    console.log(endpoint)
+    console.log(conteudo)
+	return true
+};
 
 exports.ativarRota = function(instanciaExpress,dadosRota){
 
     var nomeIntegracao = dadosRota[0];
     var tipoRest = dadosRota[1];
-    var conteudo = (dadosRota[2] === undefined ?  ``:dadosRota[2]);
+    var conteudo = (dadosRota[2] === undefined ?  "Sem informacoes recebidas" : dadosRota[2]);
+    var endpont = dadosRota[3];
 
     switch(tipoRest){
         case 'GET':
             instanciaExpress.get("/"+nomeIntegracao, function(req, resp) {
+                if(endpoint != undefined){
+                    conecta(endpont,conteudo);
+                };
                 resp.send(conteudo);
             });
             return log.registrarLog("sucesso",false, new Date(), nomeIntegracao, "Rota Acionada", tipoRest);
@@ -47,4 +42,4 @@ exports.ativarRota = function(instanciaExpress,dadosRota){
             return log.registrarLog("erro",true,new Date(), nomeIntegracao,"Metodo de Rota nao identificada",tipoRest,conteudo);
     }    
 }
-console.log('-- [/common/services/rotas.service.js] Rotas - Importando modulo - OK');
+console.log(chalk.blue('--- [/common/services/rotas.service.js] Rotas - Importando modulo - OK'));

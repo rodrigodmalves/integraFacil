@@ -1,28 +1,15 @@
-console.log('- [/index.js] Iniciando aplicacao base');
-const log = require('./common/services/log.service.js');
-const rotas = require('./common/services/rotas.service.js');
+const chalk = require('chalk');
+console.log(chalk.blue('-------------------------------------------------------------------------\n- [/index.js] Iniciando aplicacao base..'));
+
 const config = require('./common/config/env.config.js');
+const app = require('./APP/app.index.js');
+const api = require('./API/api.index.js');
+
 const express = require('express');
-const app = express();
-const api = express();
+const apiInstanciaExpress = express();
+const appInstanciaExpress = express();
 
-app.listen(config.portaApp, function () {
-    var dadosPortal = ['HOME','GET',"<html><body><h1>HOME></h1></body></html>"];
-    rotas.ativarRota(app,dadosPortal);
-    console.log('- [/index.js] APP executando. Ouvindo em %s', config.appEndpoint);
-});
+app.iniciarAPP(appInstanciaExpress,config);
+api.iniciarAPI(apiInstanciaExpress,config);
 
-//simulando uma lista de integrações ativas
-listaIntegracao = [
-    ['integra1','GET',"<html><body><h1>Integracao 1</h1></body></html>"],
-    ['integra2','GET',"<html><body><h1>Integracao 2</h1></body></html>"],
-    ['integra3','POST',"<html><body><h1>Integracao 3</h1></body></html>"]
-];
-
-api.listen(config.portaApi, function () {
-    console.log('- [/index.js] Instanciando rotas das integracoes ativas');
-    listaIntegracao.forEach(element => {rotas.ativarRota(api,element);});
-    console.log('- [/index.js] Instanciando rotas das integracoes ativas - OK');
-});
-
-console.log('- [/index.js] Iniciando aplicacao base - OK');
+console.log(chalk.blue('- [/index.js] Iniciando aplicacao base - OK\n-------------------------------------------------------------------------'));

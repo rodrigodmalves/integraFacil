@@ -1,6 +1,6 @@
 const chalk = require('chalk');
 console.log(chalk.blue('-- [/API/api.index.js] Importando modulo..'));
-const rotas = require('../common/services/rotas.service.js');
+const rotasApi = require('../common/services/rotas.service.js');
 
 exports.iniciarAPI = function (instanciaExpress, config){
     var listaIntegracao = [
@@ -11,7 +11,7 @@ exports.iniciarAPI = function (instanciaExpress, config){
 
     instanciaExpress.listen(config.portaApi, function () {
         console.log(chalk.blue('-- [/API/api.index.js] Instanciando rotas das integracoes ativas'));
-        listaIntegracao.forEach(element => {rotas.ativarRota(instanciaExpress,element);});
+        listaIntegracao.forEach(element => {rotasApi.ativarRota(instanciaExpress,element);});
         console.log(chalk.blue('-- [/API/api.index.js] Instanciando rotas das integracoes ativas - OK'));
     });
 }

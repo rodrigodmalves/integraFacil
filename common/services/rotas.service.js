@@ -2,10 +2,10 @@ const chalk = require('chalk');
 console.log(chalk.blue('--- [/common/services/rotas.service.js] Rotas - Importando modulo'));
 const log = require('../../common/services/log.service.js');
 
-module.conecta = function(endpoint,conteudo){
-    console.log(endpoint)
-    console.log(conteudo)
-	return true
+function conecta(endpoint,conteudo){
+    console.log(endpoint);
+    console.log(conteudo);
+	return true;
 };
 
 exports.ativarRota = function(instanciaExpress,dadosRota){
@@ -14,13 +14,11 @@ exports.ativarRota = function(instanciaExpress,dadosRota){
     var tipoRest = dadosRota[1];
     var conteudo = (dadosRota[2] === undefined ?  "Sem informacoes recebidas" : dadosRota[2]);
     var endpont = dadosRota[3];
-
+    
     switch(tipoRest){
         case 'GET':
             instanciaExpress.get("/"+nomeIntegracao, function(req, resp) {
-                if(endpoint != undefined){
-                    conecta(endpont,conteudo);
-                };
+                conecta(endpont,conteudo);
                 resp.send(conteudo);
             });
             return log.registrarLog("sucesso",false, new Date(), nomeIntegracao, "Rota Acionada", tipoRest);

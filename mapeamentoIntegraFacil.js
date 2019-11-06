@@ -1,3 +1,5 @@
+//async await;
+
 function conecta(endpoint,usuario,senha,formaAuth){
 	return true;
 };

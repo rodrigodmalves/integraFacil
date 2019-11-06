@@ -21,6 +21,7 @@ exports.ativarRota = function(dadosRota){
     nomeIntegracao = dadosRota[0];
     tipoRest = dadosRota[1];
     conteudo = dadosRota[2];
+
     switch(tipoRest){
         case 'GET':
             app.get('/'+nomeIntegracao, function(req, resp) {
@@ -34,19 +35,19 @@ exports.ativarRota = function(dadosRota){
                 );
             });
         case 'HEAD':
-            return log.registrarLog(new Date(), nomeIntegracao,"Tipo POST ainda nao disponivel");
+            return log.registrarLog(new Date(), nomeIntegracao,"Tipo HEAD ainda nao disponivel");
         case 'POST' :
             return log.registrarLog(new Date(), nomeIntegracao,"Tipo POST ainda nao disponivel");
         case 'PUT':
-            return log.registrarLog(new Date(), nomeIntegracao,"Tipo POST ainda nao disponivel");
+            return log.registrarLog(new Date(), nomeIntegracao,"Tipo PUT ainda nao disponivel");
         case 'PATCH':
-            return log.registrarLog(new Date(), nomeIntegracao,"Tipo POST ainda nao disponivel");
+            return log.registrarLog(new Date(), nomeIntegracao,"Tipo PATCH ainda nao disponivel");
         case 'DELETE':
-            return log.registrarLog(new Date(), nomeIntegracao,"Tipo POST ainda nao disponivel");
+            return log.registrarLog(new Date(), nomeIntegracao,"Tipo DELETE ainda nao disponivel");
         case 'CONNECT':
-            return log.registrarLog(new Date(), nomeIntegracao,"Tipo POST ainda nao disponivel");
+            return log.registrarLog(new Date(), nomeIntegracao,"Tipo CONNECT ainda nao disponivel");
         case 'TRACE':
-            return log.registrarLog(new Date(), nomeIntegracao,"Tipo POST ainda nao disponivel");
+            return log.registrarLog(new Date(), nomeIntegracao,"Tipo TRACE ainda nao disponivel");
         default:
             return log.registrarLog(new Date(), nomeIntegracao,"Tipo de Rota nao identificada",tipoRest);
     }    

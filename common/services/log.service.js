@@ -2,11 +2,10 @@ const chalk = require('chalk');
 
 console.log(chalk.blue('--- [/common/services/log.service.js] LOG - Importando modulo'));
 
-exports.registrarLog = function(tipo,exibePrompt,timestamp, integracao, mensagem,tipoRota,payload){
-    var exibePromptSucesso=false;
+exports.registrarLog = function(tipo,exibePromptSucesso=true,timestamp, integracao, mensagem,tipoRota,payload){
     switch(tipo){
         case 'sucesso': 
-            return (exibePromptSucesso === true ? console.log(chalk.bgGreen('[LOG:'+tipo+'] => [data:'+(new Date(timestamp).toISOString())+'][descIntegracao:'+integracao+'][msg:'+ mensagem +'][tipoRota:'+tipoRota +']')): true);    
+            return (exibePromptSucesso === true ? console.log(chalk.bgGreen('[LOG:'+tipo+'] => [data:'+(new Date(timestamp).toISOString())+'][descIntegracao:'+integracao+'][msg:'+ mensagem +'][tipoRota:'+tipoRota +']\n[payload:'+ payload +']')): true);    
         case 'erro': 
             return console.log(chalk.red('[LOG:'+tipo+'] => [data:'+(new Date(timestamp).toISOString())+'][descIntegracao:'+integracao+'][msg:'+ mensagem +'][tipoRota:'+tipoRota +']\n[payload:'+ payload +']'));    
         default:

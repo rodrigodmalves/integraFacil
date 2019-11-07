@@ -1,15 +1,29 @@
 const chalk = require('chalk');
 console.log(chalk.blue('--- [/common/services/rotas.service.js] Rotas - Importando modulo'));
-
 const log = require('../../common/services/log.service.js');
 const request = require('request');
 
-function enviaDados(configs,conteudo){
+function enviaDados(configs){
+
+    var retornoEndpoint = {
+        statusCode:'',
+        corpo:'',
+        mensageErro: undefined,
+        payloadEnviado: undefined
+    }
+
+    log.registrarLog("sucesso",true, new Date(), configs.integracao, "Processando dados...", configs.method,JSON.stringify(configs.request));
+    //magica para mapear o endpoint
+    configs.body=configs.request
+    log.registrarLog("sucesso",true, new Date(), configs.integracao, "Dados processados!", configs.method,JSON.stringify(configs.body));
     request(configs,(err, res, body) => {
-        if (err)
-            return {statusCode: res.statusCode, corpo: body, mensageErro: err};
-        return {statusCode: res.statusCode, corpo: body};
-    });   
+        retornoEndpoint.statusCode = res.statusCode;
+        retornoEndpoint.corpo = body;
+        if (err)    
+            retornoEndpoint.mensageErro = err;    
+    });
+    
+    return retornoEndpoint;
 };
 
 exports.ativarRota = function(instanciaExpress,dadosRota){
@@ -20,6 +34,7 @@ exports.ativarRota = function(instanciaExpress,dadosRota){
     var endpoint = dadosRota[3];
 
     configs = {
+        integracao: nomeIntegracao, 
         url: endpoint,
         method: tipoRest,
         headers: {
@@ -27,39 +42,54 @@ exports.ativarRota = function(instanciaExpress,dadosRota){
             'Accept-Charset': 'utf-8',
             'User-Agent': 'integraFacil'
         },
-        json: true
+        json: true,
+        request: '',
+        body: conteudo
     };
+
+    
+    if(tipoRest = 'APP'){
+        instanciaExpress.get("/"+nomeIntegracao, function(req, res) {
+            log.registrarLog("sucesso",true, new Date(), nomeIntegracao, "Rota acessada", tipoRest,false)
+            res.status(200).send();
+            log.registrarLog("sucesso",true, new Date(), nomeIntegracao, "Rota finalizada", tipoRest,false);
+        });
+        return true;
+    }
 
     switch(tipoRest){
         case 'GET':
             instanciaExpress.get("/"+nomeIntegracao, function(req, res) {
-                log.registrarLog("sucesso",true, new Date(), nomeIntegracao, "Rota acionada", tipoRest);
-                res.json(enviaDados(configs,conteudo)).send().status(200);
+                configs.request = req.body;
+                log.registrarLog("sucesso",true, new Date(), nomeIntegracao, "Rota acessada", tipoRest,JSON.stringify(configs.request));
+                res.send(enviaDados(configs));
+                log.registrarLog("sucesso",true, new Date(), nomeIntegracao, "Rota finalizada", tipoRest,false);
             });
-            return log.registrarLog("sucesso",false, new Date(), nomeIntegracao, "Rota liberada", tipoRest);
+            return log.registrarLog("sucesso",true, new Date(), nomeIntegracao, "Rota liberada", tipoRest,false);
         
         case 'POST':
             instanciaExpress.post("/"+nomeIntegracao, function(req, res) {
-                console.log(req.body.Body);
-                log.registrarLog("sucesso",true, new Date(), nomeIntegracao, "Rota acionada", tipoRest,req.body);
-                res.send(req.body);
+                configs.request = req.body;
+                log.registrarLog("sucesso",true, new Date(), nomeIntegracao, "Rota acessada", tipoRest,JSON.stringify(configs.request));
+                res.send(enviaDados(configs));
+                log.registrarLog("sucesso",true, new Date(), nomeIntegracao, "Rota finalizada", tipoRest,false);
             });    
-            return log.registrarLog("sucesso",false, new Date(), nomeIntegracao, "Rota liberada", tipoRest);
+            return log.registrarLog("sucesso",true, new Date(), nomeIntegracao, "Rota liberada", tipoRest,false);
 
         case 'HEAD':
-            return log.registrarLog("erro", true, new Date(), nomeIntegracao,"Metodo HEAD ainda nao disponivel",tipoRest,conteudo);
+            return log.registrarLog("erro", true, new Date(), nomeIntegracao,"Metodo HEAD ainda nao disponivel",tipoRest,false);
         case 'PUT':
-            return log.registrarLog("erro",true,new Date(), nomeIntegracao,"Metodo PUT ainda nao disponivel",tipoRest,conteudo);
+            return log.registrarLog("erro",true,new Date(), nomeIntegracao,"Metodo PUT ainda nao disponivel",tipoRest,false);
         case 'PATCH':
-            return log.registrarLog("erro",true,new Date(), nomeIntegracao,"Metodo PATCH ainda nao disponivel",tipoRest,conteudo);
+            return log.registrarLog("erro",true,new Date(), nomeIntegracao,"Metodo PATCH ainda nao disponivel",tipoRest,false);
         case 'DELETE':
-            return log.registrarLog("erro",true,new Date(), nomeIntegracao,"Metodo DELETE ainda nao disponivel",tipoRest,conteudo);
+            return log.registrarLog("erro",true,new Date(), nomeIntegracao,"Metodo DELETE ainda nao disponivel",tipoRest,false);
         case 'CONNECT':
-            return log.registrarLog("erro",true,new Date(), nomeIntegracao,"Metodo CONNECT ainda nao disponivel",tipoRest,conteudo);
+            return log.registrarLog("erro",true,new Date(), nomeIntegracao,"Metodo CONNECT ainda nao disponivel",tipoRest,false);
         case 'TRACE':
-            return log.registrarLog("erro",true,new Date(), nomeIntegracao,"Metodo TRACE ainda nao disponivel",tipoRest,conteudo);
+            return log.registrarLog("erro",true,new Date(), nomeIntegracao,"Metodo TRACE ainda nao disponivel",tipoRest,false);
         default:
-            return log.registrarLog("erro",true,new Date(), nomeIntegracao,"Metodo de Rota nao identificada",tipoRest,conteudo);
+            return log.registrarLog("erro",true,new Date(), nomeIntegracao,"Metodo de Rota nao identificada",tipoRest,false);
     }    
 }
 console.log(chalk.blue('--- [/common/services/rotas.service.js] Rotas - Importando modulo - OK'));

@@ -1,19 +1,72 @@
 const chalk = require('chalk');
 console.log(chalk.blue('-- [/API/api.index.js] Importando modulo..'));
 const rotasApi = require('../common/services/rotas.service.js');
+const conectores = require('../common/services/rotas.service.js');
 
 exports.iniciarAPI = function (instanciaExpress, config){
-    //buscar dados do banco
-    //nome, tipo,conteudo,endpontFim,
-    var listaIntegracao = [
-        ['integra1','GET',"TESTE","https://hookb.in/W1eQXXZZMXt8bdB9lJj6"],
-        ['integra2','POST',"","https://hookb.in/W1eQXXZZMXt8bdB9lJj6"]
-    ];
+
+    var listaIntegracao = {
+        integracao: [
+            {
+                conector: {
+                    endpoint : 'https://hookb.in/8Px3QaNKVXC86RgkGJ0W',
+                    tipoRest : 'GET'
+                },
+                descricao : "Integracao GET-ENTR|GET-SAIDA",
+                rotaEntrada: 'integra1',
+                rotaSaida: '/',
+                tipoRest : 'GET',
+                wsdlEntrada: true,
+                wsdlSaida: true
+            },
+            {
+                conector: {
+                    endpoint : 'https://hookb.in/8Px3QaNKVXC86RgkGJ0W',
+                    tipoRest : 'POST'
+                },
+                descricao : "Integracao GET-ENTR|POST-SAIDA",
+                rotaEntrada: 'integra2',
+                rotaSaida: '/',
+                tipoRest : 'GET',
+                wsdlEntrada: true,
+                wsdlSaida: true
+            },
+            {
+                conector: {
+                    endpoint : 'https://hookb.in/8Px3QaNKVXC86RgkGJ0W',
+                    tipoRest : 'GET'
+                },
+                descricao : "Integracao POST-ENTR|GET-SAIDA",
+                rotaEntrada: 'integra3',
+                rotaSaida: '/',
+                tipoRest : 'POST',
+                wsdlEntrada: true,
+                wsdlSaida: true
+            },
+            {
+                conector: {
+                    endpoint : 'https://hookb.in/8Px3QaNKVXC86RgkGJ0W',
+                    tipoRest : 'POST'
+                },
+                descricao : "Integracao POST-ENTR|POST-SAIDA",
+                rotaEntrada: 'integra4',
+                rotaSaida: '/',
+                tipoRest : 'POST',
+                wsdlEntrada: true,
+                wsdlSaida: true
+            }
+        ],
+    }
+    
+
 
     instanciaExpress.listen(config.portaApi, function () {
         console.log(chalk.blue('-- [/API/api.index.js] Instanciando rotas das integracoes ativas'));
-        listaIntegracao.forEach(element => {rotasApi.ativarRota(instanciaExpress,element);});
+        Object.keys(listaIntegracao).forEach(function(k){
+            rotasApi.ativarRota(instanciaExpress,listaIntegracao[k]);
+        });
         console.log(chalk.blue('-- [/API/api.index.js] Instanciando rotas das integracoes ativas - OK'));
+        console.log(chalk.blue('-- [/API/api.index.js] API executando. Ouvindo em %s'), config.apiEndpoint);
     });
 }
 

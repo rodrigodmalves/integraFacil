@@ -1,5 +1,6 @@
-console.log('--- [/users/controlles/users.controller.js] Importando modulo de controle de usuario');
-const UserModel = require('../models/users.model');
+const chalk = require('chalk');
+console.log(chalk.blue('--- [/users/controlles/users.controller.js] Importando modulo de controle de conectores'));
+const UserModel = require('../models/conectores.model.js');
 const crypto = require('crypto');
 
 exports.insert = (req, res) => {
@@ -59,4 +60,4 @@ exports.removeById = (req, res) => {
             res.status(204).send({});
         });
 };
-console.log('--- [/users/controlles/users.controller.js] Importando modulo de controle de usuario - OK');
+console.log(chalk.blue('--- [/users/controlles/users.controller.js] Importando modulo de controle de conectores - OK'));

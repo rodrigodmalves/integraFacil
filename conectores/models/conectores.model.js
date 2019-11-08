@@ -1,4 +1,5 @@
-console.log('----- [/users/models/user.model.js] Importando schema de usuario');
+const chalk = require('chalk');
+console.log(chalk.blue('----- [/conectores/models/user.model.js] Importando schema de conectores'));
 const mongoose = require('../../common/services/mongoose.service').mongoose;
 const Schema = mongoose.Schema;
 
@@ -22,10 +23,9 @@ userSchema.set('toJSON', {
 userSchema.findById = function (cb) {
     return this.model('Users').find({id: this.id}, cb);
 };
-
-console.log('------ [/users/models/user.model.js] Definindo Schema');
+console.log(chalk.blue('------ [/users/models/user.model.js] Definindo Schema'));
 const User = mongoose.model('Users', userSchema);
-console.log('------ [/users/models/user.model.js] Definindo Schema - OK');
+console.log(chalk.blue('------ [/users/models/user.model.js] Definindo Schema - OK'));
 
 
 
@@ -90,4 +90,4 @@ exports.removeById = (userId) => {
     });
 };
 
-console.log('----- [/users/models/user.model.js] Importando schema de usuario - OK');
+console.log(chalk.blue('----- [/conectores/models/user.model.js] Importando schema de conectores -- OK'));

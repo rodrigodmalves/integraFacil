@@ -1,4 +1,6 @@
-console.log('------ [/common/services/mongoose.services.js] MongoDB - Importando modulo');
+const chalk = require('chalk');
+console.log(chalk.blue('------ [/common/services/mongoose.services.js] MongoDB - Importando modulo'));
+
 const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
@@ -29,19 +31,18 @@ const options = {
 };
 
 const connectWithRetry = () => {
-    console.log('------ [/common/services/mongoose.services.js] MongoDB - Iniciando tentativa...');
+    console.log(chalk.blue('------ [/common/services/mongoose.services.js] MongoDB - Iniciando tentativa...'));  
     mongoose.connect(connectionString, options).then(()=>{
-        console.log('------ [/common/services/mongoose.services.js] MongoDB - Conectado.')
+      console.log(chalk.green('------ [/common/services/mongoose.services.js] MongoDB - Conectado.'));    
     }).catch(err=>{
-        console.log('------ [/common/services/mongoose.services.js] MongoDB - Falha de conexao ('+err+') ... tentando novamente em 5 segundos. Tentativa ', ++count);
+        console.log(chalk.red('------ [/common/services/mongoose.services.js] MongoDB - Falha de conexao ('+err+') ... tentando novamente em 5 segundos. Tentativa ',++count));    
         setTimeout(connectWithRetry, 5000)
     })
 };
-
-console.log('------ [/common/services/mongoose.services.js] MongoDB - Solicitando conexao');
+console.log(chalk.blue('------ [/common/services/mongoose.services.js] MongoDB - Solicitando conexao'));
 connectWithRetry();
-console.log('------ [/common/services/mongoose.services.js] MongoDB - Solicitando conexao - OK');
+console.log(chalk.blue('------ [/common/services/mongoose.services.js] MongoDB - Solicitando conexao - OK'));
 
 exports.mongoose = mongoose;
 
-console.log('------ [/common/services/mongoose.services.js] MongoDB - Importando modulo - OK');
+console.log(chalk.blue('------ [/common/services/mongoose.services.js] MongoDB - Importando modulo - OK'));

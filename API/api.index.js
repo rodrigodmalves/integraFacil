@@ -1,14 +1,22 @@
 const chalk = require('chalk');
 console.log(chalk.blue('-- [/API/api.index.js] Importando modulo..'));
 const rotasApi = require('../common/services/rotas.service.js');
-const conectores = require('../common/services/rotas.service.js');
+const conectores = require('../conectores/routes.config.js');
 
 exports.iniciarAPI = function (instanciaExpress, config){
+
+
+    conectores.rotaConectores(instanciaExpress);
+
+    var hook = 'https://hookb.in/QJbm8z1pMOtZ7jrRNVKr';
 
     var listaIntegracao = [
         {
             conector: {
-                endpoint : 'https://hookb.in/QJbm8z1pMOtZ7jrRNVKr',
+                id : '',
+                ativo: true,
+                testado: true,
+                endpoint : hook,
                 tipoRest : 'GET'
             },
             descricao : "Integracao GET-ENTR|GET-SAIDA",
@@ -38,7 +46,10 @@ exports.iniciarAPI = function (instanciaExpress, config){
         },
         {
             conector: {
-                endpoint : 'https://hookb.in/QJbm8z1pMOtZ7jrRNVKr',
+                id : '',
+                ativo: true,
+                testado: true,
+                endpoint : hook,
                 tipoRest : 'POST'
             },
             descricao : "Integracao GET-ENTR|POST-SAIDA",
@@ -68,7 +79,10 @@ exports.iniciarAPI = function (instanciaExpress, config){
         },
         {
             conector: {
-                endpoint : 'https://hookb.in/QJbm8z1pMOtZ7jrRNVKr',
+                id : '',
+                ativo: true,
+                testado: true,
+                endpoint : hook,
                 tipoRest : 'GET'
             },
             descricao : "Integracao POST-ENTR|GET-SAIDA",
@@ -98,7 +112,10 @@ exports.iniciarAPI = function (instanciaExpress, config){
         },
         {
             conector: {
-                endpoint : 'https://hookb.in/QJbm8z1pMOtZ7jrRNVKr',
+                id : '',
+                ativo: true,
+                testado: true,
+                endpoint : hook,
                 tipoRest : 'POST'
             },
             descricao : "Integracao POST-ENTR|POST-SAIDA",

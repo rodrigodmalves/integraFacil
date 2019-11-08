@@ -1,6 +1,7 @@
 const chalk = require('chalk');
 console.log(chalk.blue('-- [/APP/app.index.js] Importando modulo..'));
 const rotasApp = require('../common/services/rotas.service.js');
+const conectores = require('../conectores/routes.config.js');
 
 exports.iniciarAPP = function(instanciaExpress,config){
 
@@ -12,7 +13,7 @@ exports.iniciarAPP = function(instanciaExpress,config){
             tipoRest : "APP",
             wsdlEntrada: false,
             wsdlSaida: false,
-            conteudoExtra: '<html><body><h1>HOME</h1></body></html>'
+            conteudoExtra: ''
     }];
 
     instanciaExpress.listen(config.portaApp, function () {
@@ -22,6 +23,9 @@ exports.iniciarAPP = function(instanciaExpress,config){
         });
         console.log(chalk.blue('-- [/APP/app.index.js] APP executando. Ouvindo em %s'), config.appEndpoint);
     });
+
+    conectores.rotaConectores(instanciaExpress);
+
 } 
 
 console.log(chalk.blue('-- [/APP/app.index.js] Importando modulo - OK'));

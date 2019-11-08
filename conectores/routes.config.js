@@ -1,53 +1,28 @@
-console.log('-- [/users/routes.config.js] Importando modulo de usuario');
+const chalk = require('chalk');
+console.log(chalk.blue('-- [/conectores/routes.config.js] Importando modulo de conectores'));
 
 
+console.log(chalk.blue('--- [/conectores/routes.config.js] Importando modulo conectoresController'));
+const conectoresController = require('./controllers/conectores.controller.js');
+console.log(chalk.blue('--- [/conectores/routes.config.js] Importando modulo conectoresController - OK'));
 
-console.log('--- [/authorization/routes.config.js] Importando modulo UsersController');
-const UsersController = require('./controllers/users.controller');
-console.log('--- [/authorization/routes.config.js] Importando modulo UsersController - OK');
-
-console.log('--- [/authorization/routes.config.js] Importando modulo PermissionMiddleware');
-const PermissionMiddleware = require('../common/middlewares/auth.permission.middleware');
-console.log('--- [/authorization/routes.config.js] Importando modulo PermissionMiddleware - OK');
-
-console.log('--- [/authorization/routes.config.js] Importando modulo ValidationMiddleware');
-const ValidationMiddleware = require('../common/middlewares/auth.validation.middleware');
-console.log('--- [/authorization/routes.config.js] Importando modulo ValidationMiddleware - OK');
-
-
-const config = require('../common/config/env.config');
-
-const ADMIN = config.permissionLevels.ADMIN;
-const PAID = config.permissionLevels.PAID_USER;
-const FREE = config.permissionLevels.NORMAL_USER;
-
-exports.routesConfig = function (app) {
-    console.log('--- [/users/routes.config.js] Configurando rotas nivel usuario');
-    app.post('/users', [
-        UsersController.insert
+exports.rotaConectores = function (app) {
+    console.log(chalk.blue('--- [/conectores/routes.config.js] Configurando rotas conectores'));
+    app.post('/conectores', [
+        conectoresController.insert
     ]);
-    app.get('/users', [
-        ValidationMiddleware.validJWTNeeded,
-        PermissionMiddleware.minimumPermissionLevelRequired(PAID),
-        UsersController.list
+    app.get('/conectores', [
+        conectoresController.list
     ]);
-    app.get('/users/:userId', [
-        ValidationMiddleware.validJWTNeeded,
-        PermissionMiddleware.minimumPermissionLevelRequired(FREE),
-        PermissionMiddleware.onlySameUserOrAdminCanDoThisAction,
-        UsersController.getById
+    app.get('/conectores/:id', [
+        conectoresController.getById
     ]);
-    app.patch('/users/:userId', [
-        ValidationMiddleware.validJWTNeeded,
-        PermissionMiddleware.minimumPermissionLevelRequired(FREE),
-        PermissionMiddleware.onlySameUserOrAdminCanDoThisAction,
-        UsersController.patchById
+    app.patch('/conectores/:id', [
+        conectoresController.patchById
     ]);
-    app.delete('/users/:userId', [
-        ValidationMiddleware.validJWTNeeded,
-        PermissionMiddleware.minimumPermissionLevelRequired(ADMIN),
-        UsersController.removeById
+    app.delete('/conectores/:id', [
+        conectoresController.removeById
     ]);
-    console.log('--- [/users/routes.config.js] Configurando rotas nivel usuario - OK');
+    console.log(chalk.blue('--- [/conectores/routes.config.js] Configurando rotas conectores - OK'));
 };
-console.log('-- [/users/routes.config.js] Importando modulo de usuario - OK');
+console.log(chalk.blue('-- [/conectores/routes.config.js] Importando modulo de conectores - OK'));

@@ -8,23 +8,22 @@ function enviaDadosGET(configs,response){
 
     log.registrarLog("sucesso",true, new Date(), configs.integracao, "Processando dados...", configs.method,false);
     configs.body = mapeador.makePayloadFinal(configs.request,configs.wsdlInicio,configs.wsdlFim,configs.mapa);
-    log.registrarLog("sucesso",true, new Date(), configs.integracao, "Dados processados!", configs.method,JSON.stringify(configs.body));
+    log.registrarLog("sucesso",true, new Date(), configs.integracao, "Dados processados!", configs.method,false);
     request(configs, function(err, res, body){
         if (err){
             response.status('500').send({
                 statusCode: res.statusCode,
-                corpo:body,
                 mensageErro: err,
-                payloadRecebido: configs.body
+                payloadEncaminhado:configs.body,
+                payloadRetornado: body
             });
             return log.registrarLog("erro",true, new Date(), configs.integracao, "Erro na chamada do endpoint final", configs.method,JSON.stringify(retornoEndpoint));
         }
         else
             response.status('200').send({
                 statusCode: res.statusCode,
-                corpo:body,
-                mensageErro: undefined,
-                payloadRecebido: configs.body
+                payloadEncaminhado:configs.body,
+                payloadRetornado: body
             });
             return log.registrarLog("sucesso",true, new Date(), configs.integracao, "Chamada OK", configs.method,false);
     }); 
@@ -34,23 +33,22 @@ function enviaDadosPOST(configs,response){
 
     log.registrarLog("sucesso",true, new Date(), configs.integracao, "Processando dados...", configs.method,false);
     configs.body = mapeador.makePayloadFinal(configs.request,configs.wsdlInicio,configs.wsdlFim,configs.mapa);
-    log.registrarLog("sucesso",true, new Date(), configs.integracao, "Dados processados!", configs.method,JSON.stringify(configs.body));
+    log.registrarLog("sucesso",true, new Date(), configs.integracao, "Dados processados!", configs.method,false);
     request(configs, function(err, res, body){
         if (err){
             response.status('500').send({
                 statusCode: res.statusCode,
-                corpo:body,
                 mensageErro: err,
-                payloadRecebido: configs.body
+                payloadEncaminhado:configs.body,
+                payloadRetornado: body
             });
-            return log.registrarLog("erro",true, new Date(), configs.integracao, "Erro na chamada do endpoint final", configs.method,JSON.stringify(retornoEndpoint));
+            return log.registrarLog("erro",true, new Date(), configs.integracao, "Erro na chamada do endpoint final", configs.method,false);
         }
         else
             response.status('200').send({
                 statusCode: res.statusCode,
-                corpo:body,
-                mensageErro: undefined,
-                payloadRecebido: configs.body
+                payloadEncaminhado:configs.body,
+                payloadRetornado: body
             });
             return log.registrarLog("sucesso",true, new Date(), configs.integracao, "Chamada OK", configs.method,false);
     });
@@ -62,7 +60,7 @@ exports.ativarRota = function(instanciaExpress,dadosRota){
     if(dadosRota.tipoRest == 'APP'){
         instanciaExpress.get("/"+dadosRota.rotaEntrada, function(req, res) {
             log.registrarLog("sucesso",true, new Date(), dadosRota.rotaEntrada, "Rota acessada", dadosRota.tipoRest,false)
-            res.status(200).send();
+            res.status(200).send(JSON.stringify(dadosRota.conteudoExtra));
             log.registrarLog("sucesso",true, new Date(), dadosRota.rotaEntrada, "Rota finalizada", dadosRota.tipoRest,false);
         });
         return true;
@@ -86,19 +84,26 @@ exports.ativarRota = function(instanciaExpress,dadosRota){
         switch(dadosRota.tipoRest){
             case 'GET':
                 instanciaExpress.get("/"+dadosRota.rotaEntrada, function(req, res) {
+                    console.log("-----------------------------------------------------------------");
                     configs.request = req.body;
-                    log.registrarLog("sucesso",true, new Date(), dadosRota.rotaEntrada, "Rota acessada", dadosRota.tipoRest,JSON.stringify(configs.request));
+                    configs.integracao = req.url;
+                    configs.method = dadosRota.conector.tipoRest;
+                    log.registrarLog("sucesso",true, new Date(), req.url, "Rota acessada", dadosRota.tipoRest,false);
                     enviaDadosGET(configs,res);
-                    log.registrarLog("sucesso",true, new Date(), dadosRota.rotaEntrada, "Rota finalizada", dadosRota.tipoRest,false);
+                    log.registrarLog("sucesso",true, new Date(), req.url, "Rota finalizada", dadosRota.tipoRest,false);
                 });
                 return log.registrarLog("sucesso",true, new Date(), dadosRota.rotaEntrada, "Rota liberada", dadosRota.tipoRest,false);
             
             case 'POST':
                 instanciaExpress.post("/"+dadosRota.rotaEntrada, function(req, res) {
+                    console.log("-----------------------------------------------------------------");
                     configs.request = req.body;
-                    log.registrarLog("sucesso",true, new Date(), dadosRota.rotaEntrada, "Rota acessada", dadosRota.tipoRest,JSON.stringify(configs.request));
+                    configs.integracao = req.url;
+                    configs.method = dadosRota.conector.tipoRest;
+
+                    log.registrarLog("sucesso",true, new Date(), req.url, "Rota acessada", dadosRota.tipoRest,false);
                     enviaDadosPOST(configs,res);
-                    log.registrarLog("sucesso",true, new Date(), dadosRota.rotaEntrada, "Rota finalizada", dadosRota.tipoRest,false);
+                    log.registrarLog("sucesso",true, new Date(), req.url, "Rota finalizada", dadosRota.tipoRest,false);
                 });    
                 return log.registrarLog("sucesso",true, new Date(), dadosRota.rotaEntrada, "Rota liberada", dadosRota.tipoRest,false);
 

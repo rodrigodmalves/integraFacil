@@ -12,7 +12,7 @@ exports.iniciarAPP = function(instanciaExpress,config){
             tipoRest : "APP",
             wsdlEntrada: false,
             wsdlSaida: false,
-            conteudoExtra: "<html><body><h1>HOME</h1></body></html>"
+            conteudoExtra: '<html><body><h1>HOME</h1></body></html>'
     }];
 
     instanciaExpress.listen(config.portaApp, function () {

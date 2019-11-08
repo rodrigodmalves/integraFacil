@@ -16,7 +16,8 @@ exports.iniciarAPI = function (instanciaExpress, config){
             rotaSaida: '/',
             tipoRest : 'GET',
             wsdlEntrada: true,
-            wsdlSaida: true
+            wsdlSaida: true,
+            mapa:true
         },
         {
             conector: {
@@ -28,7 +29,8 @@ exports.iniciarAPI = function (instanciaExpress, config){
             rotaSaida: '/',
             tipoRest : 'GET',
             wsdlEntrada: true,
-            wsdlSaida: true
+            wsdlSaida: true,
+            mapa:true
         },
         {
             conector: {
@@ -40,7 +42,8 @@ exports.iniciarAPI = function (instanciaExpress, config){
             rotaSaida: '/',
             tipoRest : 'POST',
             wsdlEntrada: true,
-            wsdlSaida: true
+            wsdlSaida: true,
+            mapa:true
         },
         {
             conector: {
@@ -52,7 +55,8 @@ exports.iniciarAPI = function (instanciaExpress, config){
             rotaSaida: '/',
             tipoRest : 'POST',
             wsdlEntrada: true,
-            wsdlSaida: true
+            wsdlSaida: true,
+            mapa:true
         }
     ];
     instanciaExpress.listen(config.portaApi, function () {

@@ -54,11 +54,11 @@ function enviaDadosPOST(configs,response){
     });
 };
 
-
 exports.ativarRota = function(instanciaExpress,dadosRota){
     
     if(dadosRota.tipoRest == 'APP'){
         instanciaExpress.get("/"+dadosRota.rotaEntrada, function(req, res) {
+            console.log("-----------------------------------------------------------------");
             log.registrarLog("sucesso",true, new Date(), dadosRota.rotaEntrada, "Rota acessada", dadosRota.tipoRest,false)
             res.status(200).send(JSON.stringify(dadosRota.conteudoExtra));
             log.registrarLog("sucesso",true, new Date(), dadosRota.rotaEntrada, "Rota finalizada", dadosRota.tipoRest,false);

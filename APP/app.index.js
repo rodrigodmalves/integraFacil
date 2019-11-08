@@ -1,7 +1,8 @@
 const chalk = require('chalk');
 console.log(chalk.blue('-- [/APP/app.index.js] Importando modulo..'));
 const rotasApp = require('../common/services/rotas.service.js');
-const conectores = require('../conectores/routes.config.js');
+//const conectores = require('../dados/conectores/routes.config.js');
+//const integracoes = require('../dados/integracoes/routes.config.js');
 
 exports.iniciarAPP = function(instanciaExpress,config){
 
@@ -24,7 +25,8 @@ exports.iniciarAPP = function(instanciaExpress,config){
         console.log(chalk.blue('-- [/APP/app.index.js] APP executando. Ouvindo em %s'), config.appEndpoint);
     });
 
-    conectores.rotaConectores(instanciaExpress);
+    //conectores.rotaConectores(instanciaExpress);
+    //integracoes.rotaIntegracoes(instanciaExpress);
 
 } 
 

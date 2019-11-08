@@ -1,14 +1,13 @@
 const chalk = require('chalk');
 console.log(chalk.blue('-- [/API/api.index.js] Importando modulo..'));
 const rotasApi = require('../common/services/rotas.service.js');
-const conectores = require('../conectores/routes.config.js');
+//const conectores = require('../conectores/routes.config.js');
 
 exports.iniciarAPI = function (instanciaExpress, config){
 
 
-    conectores.rotaConectores(instanciaExpress);
-
-    var hook = 'https://hookb.in/QJbm8z1pMOtZ7jrRNVKr';
+    //sconectores.rotaConectores(instanciaExpress);
+    var hook = 'https://hookb.in/K3bRgXpBbwtyYpo7Kbbd';
 
     var listaIntegracao = [
         {

@@ -3,18 +3,30 @@ console.log(chalk.blue('------ [/common/services/mongoose.services.js] MongoDB -
 
 const mongoose = require('mongoose');
 
-const userSchema = new mongoose.Schema({
-    username: {
+const conectorSchema = new mongoose.Schema({
+    descricao: {
       type: String,
-      required: [true,'------ [/common/services/mongoose.services.js] Username é requerido']
+      required: [true,'descricao eh requerido']
     },
-    created: {
-      type: Date,
-      required: [true, '------ [/common/services/mongoose.services.js] Created date é requerido']
+    ativo: {
+      type: Boolean,
+      required: [true,'ativo eh requerido']
+    },
+    testado: {
+      type: Boolean,
+      required: [true,'testado eh requerido']
+    },
+    endpoint: {
+      type: String,
+      required: [true, 'endpoint eh requerido']
+    },
+    tipoRest: {
+      type: String,
+      required: [true, 'tipoRest eh requerido']
     }
   })
 
-constUser = mongoose.model('user', userSchema, 'user');
+constConectores = mongoose.model('conector', conectorSchema, 'conector');
 //const connectionString ='mongodb+srv://integrafacil:flgb8409@cluster0-b9ios.gcp.mongodb.net/test?retryWrites=true&w=majority';
 const connectionString ="mongodb://localhost:27017/integrafacil";
 let count = 0;

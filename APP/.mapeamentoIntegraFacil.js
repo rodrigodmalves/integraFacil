@@ -79,13 +79,4 @@ function ativarIntegracao(integracao){
  };
 
 
-//backend 
-
-
-function buscaMapeamento(integracao){
-	return true;
-}
-
-
-
 	

@@ -7,7 +7,7 @@ exports.iniciarAPI = function (instanciaExpress, config){
 
 
     //sconectores.rotaConectores(instanciaExpress);
-    var hook = 'https://hookb.in/K3bRgXpBbwtyYpo7Kbbd';
+    var hook = 'https://hookb.in/wNeRdxr2wBhYKMwPmeeK';
 
     var listaIntegracao = [
         {

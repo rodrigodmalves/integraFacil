@@ -80,36 +80,12 @@ function ativarIntegracao(integracao){
 
 
 //backend 
-function subirServicos(integracaoAtiva){
-	return ativarIntegracao(integracaoAtiva);
-}
 
-function init(){
-	listaIntegracoesAtivas = buscaIntegracoesAtivos();
-	listaIntegracoesAtivas.foreach(subirServicos)	 
-	return true
-}
+
 function buscaMapeamento(integracao){
 	return true;
 }
 
-function mapear(mapeamento,payloadRecebido){
-	//Bater lista campo entrada = campo saida com for
-	return true
-}
-function enviaPayload(payloadMapeado){
-	//conectar com o endpoint final
-	//enviar payload 
-	//salvar retorno do endpoint.
-	return true;
-}
-function acionarRota(integracao,payloadRecebido){
-	registrarLog(date.now(),integracao,"recebido Payload",payloadRecebido)
-	mapeamento = buscaMapeamento(integracao);
-	payloadMapeado = mapear(mapeamento,payloadRecebido)
-	registrarLog(date.now(),integracao,"Mapeado Payload",payloadMapeado)
-	resultadoEnvio=enviaPayload(payloadMapeado);
-	registrarLog(date.now(),integracao,"Mensagem Retorno")
-	FIM
-}
+
+
 	

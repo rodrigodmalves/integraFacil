@@ -1,0 +1,2 @@
+docker pull rodrigodmalves/integrafacil:latest
+docker run rodrigodmalves/integrafacil:latest

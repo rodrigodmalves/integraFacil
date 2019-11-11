@@ -4,7 +4,7 @@ console.log(chalk.blue('---- [/API/mapeador/mapeador.index.js] Mapeador - Import
 exports.makePayloadFinal = function(payloadRecebido, wsdlInicio, wsdlFim,mapa){
     
     var arrayPayloadFinal=[];
-    var log=false;
+    var log=true;
     
     Object.keys(mapa).forEach(function(nomeCampoMapa){
         arrayPayloadFinal[mapa[nomeCampoMapa]] = payloadRecebido[nomeCampoMapa];

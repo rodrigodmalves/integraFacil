@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/rodrigodmalves/integraFacil#readme",
   "dependencies": {
+    "chalk": ">=1.1.0", 
     "body-parser": ">=1.7.0",
     "express": "^=4.8.7",
     "jsonwebtoken": "^7.3.0",

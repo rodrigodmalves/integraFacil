@@ -1,2 +1,1 @@
-web: npm install
-web: nodemon index.js
+web: node index.js
